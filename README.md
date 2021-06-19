@@ -1,17 +1,18 @@
-# Fitur Chatting
+# Fitur Chatting: Tasya Assitant
 
 ## Connect to Socket.io
 
 ### End Point
 
-`http://localhost:3000`
+`http://localhost:3000 || https://chat-dev.pakuwongroup.com` 
 
 ### Params
 
 ```
 {
     user_type: integer|1=user,2=admin,
-    user_id: integer
+    user_id: integer,
+    token: get from basic auth
 }
 ```
 
@@ -122,18 +123,21 @@ socket.on('send-chatting', function(data){
 
 `REST API`
 
+**endpoint** : `https://bo-dev.pakuwongroup.com/api`
+
 ### Request
 
 **Method** : `GET`
 
-**URL** : `/api/last-chat-contact`
+**URL** : `${endpoint}/last-chat-contact`
 
 **Headers** : 
 
 ```
 {
     'Accept': 'application/json',
-    'Content-type: 'application/json' 
+    'Content-type': 'application/json',
+    'Authorization': 'get from basic auth'
 }
 ```
 **Params** :
@@ -195,7 +199,7 @@ socket.on('send-chatting', function(data){
 
 ## History Chat / Detail Chat
 
-## Mark as read - Last Chat Contact
+## Mark as read - Last Chat
 
 ### Protokol
 
@@ -205,14 +209,15 @@ socket.on('send-chatting', function(data){
 
 **Method** : `GET`
 
-**URL** : `/api/chat`
+**URL** : `${endpoint}/chat`
 
 **Headers** : 
 
 ```
 {
     'Accept': 'application/json',
-    'Content-type: 'application/json' 
+    'Content-type': 'application/json',
+    'Authorization': 'get from basic auth'
 }
 ```
 **Params** :
