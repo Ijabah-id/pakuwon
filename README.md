@@ -193,7 +193,7 @@ socket.on('send-chatting', function(data){
 
 ```
 
-## History Chat
+## History Chat / Detail Chat
 
 ## Mark as read - Last Chat Contact
 
@@ -238,32 +238,14 @@ socket.on('send-chatting', function(data){
                 "to": 1,
                 "from_data": {
                     "id": 1,
-                    "dob": "2020-05-19",
                     "name": "usertest",
-                    "email": "muhamad.rizky1996@gmail.com",
                     "image": null,
-                    "phone": "082117222360",
-                    "gender": 1,
-                    "status": "active",
-                    "id_number": null,
                     "user_type": 1,
-                    "created_at": "2021-06-04T15:54:47.000000Z",
-                    "updated_at": "2021-06-04T15:54:47.000000Z",
-                    "pg_card_number": null,
-                    "last_sign_in_at": null,
-                    "email_verified_at": null,
-                    "phone_verified_at": "2021-06-04 22:54:47"
                 },
                 "to_data": {
                     "id": 1,
                     "name": "usertest",
-                    "email": "muhamad.rizky1996@gmail.com",
-                    "phone": "082117222360",
-                    "status": "active",
                     "user_type": 2,
-                    "created_at": "2021-06-04T15:54:47.000000Z",
-                    "updated_at": "2021-06-04T15:54:47.000000Z",
-                    "last_sign_in_at": null
                 },
                 "data": {
                     "type": "text",
@@ -285,30 +267,13 @@ socket.on('send-chatting', function(data){
                     "id": 1,
                     "dob": "2020-05-19",
                     "name": "usertest",
-                    "email": "muhamad.rizky1996@gmail.com",
                     "image": null,
-                    "phone": "082117222360",
-                    "gender": 1,
-                    "status": "active",
-                    "id_number": null,
                     "user_type": 1,
-                    "created_at": "2021-06-04T15:54:47.000000Z",
-                    "updated_at": "2021-06-04T15:54:47.000000Z",
-                    "pg_card_number": null,
-                    "last_sign_in_at": null,
-                    "email_verified_at": null,
-                    "phone_verified_at": "2021-06-04 22:54:47"
                 },
                 "to_data": {
                     "id": 1,
                     "name": "usertest",
-                    "email": "muhamad.rizky1996@gmail.com",
-                    "phone": "082117222360",
-                    "status": "active",
                     "user_type": 2,
-                    "created_at": "2021-06-04T15:54:47.000000Z",
-                    "updated_at": "2021-06-04T15:54:47.000000Z",
-                    "last_sign_in_at": null
                 },
                 "data": {
                     "type": "text",
