@@ -1,18 +1,17 @@
-# Fitur Chatting: Tasya Assitant
+# Fitur Chatting
 
 ## Connect to Socket.io
 
 ### End Point
 
-`http://localhost:3000 || https://chat-dev.pakuwongroup.com` 
+`http://localhost:3000`
 
 ### Params
 
 ```
 {
     user_type: integer|1=user,2=admin,
-    user_id: integer,
-    token: get from basic auth
+    user_id: integer
 }
 ```
 
@@ -123,21 +122,18 @@ socket.on('send-chatting', function(data){
 
 `REST API`
 
-**endpoint** : `https://bo-dev.pakuwongroup.com/api`
-
 ### Request
 
 **Method** : `GET`
 
-**URL** : `${endpoint}/last-chat-contact`
+**URL** : `/api/last-chat-contact`
 
 **Headers** : 
 
 ```
 {
     'Accept': 'application/json',
-    'Content-type': 'application/json',
-    'Authorization': 'get from basic auth'
+    'Content-type: 'application/json' 
 }
 ```
 **Params** :
@@ -197,9 +193,9 @@ socket.on('send-chatting', function(data){
 
 ```
 
-## History Chat / Detail Chat
+## History Chat
 
-## Mark as read - Last Chat
+## Mark as read - Last Chat Contact
 
 ### Protokol
 
@@ -209,15 +205,14 @@ socket.on('send-chatting', function(data){
 
 **Method** : `GET`
 
-**URL** : `${endpoint}/chat`
+**URL** : `/api/chat`
 
 **Headers** : 
 
 ```
 {
     'Accept': 'application/json',
-    'Content-type': 'application/json',
-    'Authorization': 'get from basic auth'
+    'Content-type: 'application/json' 
 }
 ```
 **Params** :
@@ -243,14 +238,32 @@ socket.on('send-chatting', function(data){
                 "to": 1,
                 "from_data": {
                     "id": 1,
+                    "dob": "2020-05-19",
                     "name": "usertest",
+                    "email": "muhamad.rizky1996@gmail.com",
                     "image": null,
+                    "phone": "082117222360",
+                    "gender": 1,
+                    "status": "active",
+                    "id_number": null,
                     "user_type": 1,
+                    "created_at": "2021-06-04T15:54:47.000000Z",
+                    "updated_at": "2021-06-04T15:54:47.000000Z",
+                    "pg_card_number": null,
+                    "last_sign_in_at": null,
+                    "email_verified_at": null,
+                    "phone_verified_at": "2021-06-04 22:54:47"
                 },
                 "to_data": {
                     "id": 1,
                     "name": "usertest",
+                    "email": "muhamad.rizky1996@gmail.com",
+                    "phone": "082117222360",
+                    "status": "active",
                     "user_type": 2,
+                    "created_at": "2021-06-04T15:54:47.000000Z",
+                    "updated_at": "2021-06-04T15:54:47.000000Z",
+                    "last_sign_in_at": null
                 },
                 "data": {
                     "type": "text",
@@ -272,13 +285,30 @@ socket.on('send-chatting', function(data){
                     "id": 1,
                     "dob": "2020-05-19",
                     "name": "usertest",
+                    "email": "muhamad.rizky1996@gmail.com",
                     "image": null,
+                    "phone": "082117222360",
+                    "gender": 1,
+                    "status": "active",
+                    "id_number": null,
                     "user_type": 1,
+                    "created_at": "2021-06-04T15:54:47.000000Z",
+                    "updated_at": "2021-06-04T15:54:47.000000Z",
+                    "pg_card_number": null,
+                    "last_sign_in_at": null,
+                    "email_verified_at": null,
+                    "phone_verified_at": "2021-06-04 22:54:47"
                 },
                 "to_data": {
                     "id": 1,
                     "name": "usertest",
+                    "email": "muhamad.rizky1996@gmail.com",
+                    "phone": "082117222360",
+                    "status": "active",
                     "user_type": 2,
+                    "created_at": "2021-06-04T15:54:47.000000Z",
+                    "updated_at": "2021-06-04T15:54:47.000000Z",
+                    "last_sign_in_at": null
                 },
                 "data": {
                     "type": "text",
@@ -394,4 +424,151 @@ socket.on('user-online', function (data) {
     console.log(data);
 });
 
+```
+
+## Send Broadcast
+
+### Protokol : 
+
+`WS Socket.io`
+
+### Event : 
+
+`broadcast`
+
+### Data Payload :
+
+```
+
+{
+    "from": integer,
+    "from_type": integer|1=user,2=admin,
+    "to": array[],
+    "to_type": integer|1=user,2=admin,
+    "type": string|text,product,image,
+    "message": string,
+    "product_id": integer,
+    "variant_id": integer,
+    "image": base64
+}
+
+```
+
+### Example :
+
+```
+socket.emit('send-chatting', {
+    "from": integer,
+    "from_type": integer|1=user,2=admin,
+    "to": array[],
+    "to_type": integer|1=user,2=admin,
+    "type": string|text,product,image,
+    "message": string,
+    "product": integer,
+    "variant_id": integer,
+    "image": base64
+});
+
+socket.on('send-chatting', function(data){
+    console.log(data);
+});
+```
+
+**Data Callback**
+
+```
+{
+    "success": true,
+    "data": [{
+        "channel": "e4da3b7fbbce2345d7772b0674a318d5",
+        "from": 1,
+        "to": 1,
+        "from_data": {
+            "id": 1,
+            "name": "usertest",
+            "image": null,
+            "user_type": 1
+        },
+        "to_data": {
+            "id": 1,
+            "name": "usertest",
+            "last_sign_in_at": null,
+            "user_type": 2
+        },
+        "data": {
+            "message": "hi go 123",
+            "product": {
+                "id": 2,
+                "title": "Carla Levy",
+                "image": "9a8601cefa6cc152809da4d47db785bd.png",
+                "price": 80000,
+                "link": "http://localhost:8000/product/2"
+            },
+            "image": null,
+            "is_read": false,
+            "type": "text"
+        },
+        "updated_at": "2021-06-05T14:56:05.000000Z",
+        "created_at": "2021-06-05T14:56:05.000000Z",
+        "id": 19
+    }],
+    "message": "Berhasil simpan data"
+}
+
+```
+
+## Typing Handler
+
+### Protokol :
+
+`WS Socket.io`
+
+
+### Event :
+
+`typing`
+
+### Data Payload :
+
+```
+{
+    user_id: integer  |get from auth login,
+    user_type: integer| 1=user,2=admin
+    user_name: string | get from auth login
+    typing: true
+}
+```
+
+### Example :
+
+```
+    socket.emit('typing', {
+        user_id: this.auth.id,
+        user_type: this.auth.type,
+        user_name: this.auth.name,
+        typig: true
+    });
+```
+
+### Usage :
+
+<p>Get <code>data.typing</code> from <code>api/last-chat-contact</code>.</p>
+<p>Then watch/listen on socket <code>typing</code> event while update your state like these below:</p>
+
+```
+  updateTypingLastChatUsers(state, payload) {
+    if(state.lastChatUsers) {
+      state.lastChatUsers.map((item) => {
+        if(payload.user_id == item.to_data.id && payload.user_type == item.to_data.user_type) {
+          item.typing = payload.typing;
+        }
+        if(state.userChat) {
+          if(payload.user_id == state.userChat.id && payload.user_type == state.userChat.type) {
+            state.userChat.typing = payload.typing;
+          }
+        }
+        return item;
+      });
+    }
+  },
 ```
