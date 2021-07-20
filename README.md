@@ -4,7 +4,7 @@
 
 ### End Point
 
-`http://localhost:3000`
+`http://localhost:3000 || https://chat-dev.pakuwongroup.com/socket.io`
 
 ### Params
 
