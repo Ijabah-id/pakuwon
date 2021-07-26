@@ -100,7 +100,8 @@ socket.on('send-chatting', function(data){
                 "title": "Carla Levy",
                 "image": "9a8601cefa6cc152809da4d47db785bd.png",
                 "price": 80000,
-                "link": "http://localhost:8000/product/2"
+                "link": "http://localhost:8000/product/2",
+                "store": "Uniqlo"
             },
             "image": null,
             "is_read": false,
