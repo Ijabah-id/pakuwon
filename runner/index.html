@@ -1,0 +1,449 @@
+<h1 id="fitur-runner-chatting">Fitur Runner Chatting</h1>
+<h2 id="connect-to-socket.io">Connect to Socket.io</h2>
+<h3 id="end-point">End Point</h3>
+<p><code>http://localhost:3000</code></p>
+<h3 id="params">Params</h3>
+<pre><code>{
+    user_type: integer|3=runner,2=admin,
+    user_id: integer,
+    token: TOKEN
+}</code></pre>
+<h3 id="example">Example</h3>
+<pre><code>var socket = io(&quot;http://localhost:3000?user_type=3&amp;user_id=1&amp;token=UGFrdXdvbkdyb3VwOkJsbzNXZWJlV2E0QmV5Q3hPbnlo);</code></pre>
+<h2 id="send-chat">Send Chat</h2>
+<h3 id="protokol">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event">Event :</h3>
+<p><code>runner-send-chatting</code></p>
+<h3 id="data-payload">Data Payload :</h3>
+<pre><code>
+{
+    &quot;from&quot;: integer,
+    &quot;from_type&quot;: integer|3=runner,2=admin,
+    &quot;to&quot;: integer,
+    &quot;to_type&quot;: integer|3=runner,2=admin,
+    &quot;type&quot;: string|text,product,image,
+    &quot;message&quot;: string,
+    &quot;product_id&quot;: integer,
+    &quot;variant_id&quot;: integer,
+    &quot;image&quot;: base64
+}
+</code></pre>
+<h3 id="example-1">Example :</h3>
+<pre><code>socket.emit(&#39;runner-send-chatting&#39;, {
+    &quot;from&quot;: integer,
+    &quot;from_type&quot;: integer|3=runner,2=admin,
+    &quot;to&quot;: integer,
+    &quot;to_type&quot;: integer|3=runner,2=admin,
+    &quot;type&quot;: string|text,product,image,
+    &quot;message&quot;: string,
+    &quot;product&quot;: integer,
+    &quot;variant_id&quot;: integer,
+    &quot;image&quot;: base64
+}, (data) =&gt; {
+    //code for callback
+});
+
+socket.on(&#39;runner-send-chatting&#39;, function(data){
+    console.log(data);
+});</code></pre>
+<p><strong>Data Callback</strong></p>
+<pre><code>{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
+        &quot;from&quot;: 1,
+        &quot;to&quot;: 1,
+        &quot;from_data&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;usertest&quot;,
+            &quot;image&quot;: null,
+            &quot;user_type&quot;: 3
+        },
+        &quot;to_data&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;usertest&quot;,
+            &quot;last_sign_in_at&quot;: null,
+            &quot;user_type&quot;: 2
+        },
+        &quot;data&quot;: {
+            &quot;message&quot;: &quot;hi go 123&quot;,
+            &quot;product&quot;: {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Carla Levy&quot;,
+                &quot;image&quot;: &quot;9a8601cefa6cc152809da4d47db785bd.png&quot;,
+                &quot;price&quot;: 80000,
+                &quot;link&quot;: &quot;http://localhost:8000/product/2&quot;
+            },
+            &quot;image&quot;: null,
+            &quot;is_read&quot;: false,
+            &quot;type&quot;: &quot;text&quot;
+        },
+        &quot;updated_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
+        &quot;id&quot;: 19
+    },
+    &quot;message&quot;: &quot;Berhasil simpan data&quot;
+}
+</code></pre>
+<h2 id="last-chat-contact">Last Chat Contact</h2>
+<h3 id="protokol-1">Protokol</h3>
+<p><code>REST API</code></p>
+<h3 id="request">Request</h3>
+<p><strong>Method</strong> : <code>GET</code></p>
+<p><strong>URL</strong> : <code>/api/runner/last-chat-contact</code></p>
+<p><strong>Headers</strong> :</p>
+<pre><code>{
+    &#39;Accept&#39;: &#39;application/json&#39;,
+    &#39;Content-type: &#39;application/json&#39; 
+}</code></pre>
+<p><strong>Params</strong> :</p>
+<pre><code>{
+    user_type: integer|3=runner,2=admin,
+    user_id: integer
+}</code></pre>
+<h3 id="response">Response</h3>
+<pre><code>{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;data&quot;: [
+            {
+                &quot;id&quot;: 3,
+                &quot;user_id&quot;: 1,
+                &quot;user_type&quot;: 3,
+                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
+                &quot;to&quot;: 1,
+                &quot;to_data&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;usertest&quot;,
+                    &quot;user_type&quot;: 2,
+                },
+                &quot;last_data&quot;: {
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;image&quot;: null,
+                    &quot;is_read&quot;: false,
+                    &quot;message&quot;: &quot;ulala&quot;,
+                    &quot;product&quot;: null
+                },
+                &quot;is_read&quot;: 1,
+                &quot;deleted_at&quot;: null,
+                &quot;created_at&quot;: &quot;2021-06-05T14:22:37.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-06-05T17:22:05.000000Z&quot;
+            }
+        ],
+        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/last-chat-contact?page=1&quot;,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 1,
+        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/last-chat-contact?page=1&quot;,
+        &quot;next_page_url&quot;: null,
+        &quot;path&quot;: &quot;http://localhost:8000/api/last-chat-contact&quot;,
+        &quot;per_page&quot;: 10,
+        &quot;prev_page_url&quot;: null,
+        &quot;to&quot;: 1,
+        &quot;total&quot;: 1
+    },
+    &quot;message&quot;: null
+}
+</code></pre>
+<h2 id="history-chat">History Chat</h2>
+<h2 id="mark-as-read---last-chat-contact">Mark as read - Last Chat Contact</h2>
+<h3 id="protokol-2">Protokol</h3>
+<p><code>REST API</code></p>
+<h3 id="request-1">Request</h3>
+<p><strong>Method</strong> : <code>GET</code></p>
+<p><strong>URL</strong> : <code>/api/runner/chat</code></p>
+<p><strong>Headers</strong> :</p>
+<pre><code>{
+    &#39;Accept&#39;: &#39;application/json&#39;,
+    &#39;Content-type: &#39;application/json&#39; 
+}</code></pre>
+<p><strong>Params</strong> :</p>
+<pre><code>{
+    channel: string
+}</code></pre>
+<h3 id="response-1">Response</h3>
+<pre><code>{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;data&quot;: [
+            {
+                &quot;id&quot;: 19,
+                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
+                &quot;from&quot;: 1,
+                &quot;to&quot;: 1,
+                &quot;from_data&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;dob&quot;: &quot;2020-05-19&quot;,
+                    &quot;name&quot;: &quot;usertest&quot;,
+                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
+                    &quot;image&quot;: null,
+                    &quot;phone&quot;: &quot;082117222360&quot;,
+                    &quot;gender&quot;: 1,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;id_number&quot;: null,
+                    &quot;user_type&quot;: 3,
+                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;pg_card_number&quot;: null,
+                    &quot;last_sign_in_at&quot;: null,
+                    &quot;email_verified_at&quot;: null,
+                    &quot;phone_verified_at&quot;: &quot;2021-06-04 22:54:47&quot;
+                },
+                &quot;to_data&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;usertest&quot;,
+                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
+                    &quot;phone&quot;: &quot;082117222360&quot;,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;user_type&quot;: 2,
+                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;last_sign_in_at&quot;: null
+                },
+                &quot;data&quot;: {
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;image&quot;: null,
+                    &quot;is_read&quot;: true,
+                    &quot;message&quot;: &quot;hi go 123&quot;,
+                    &quot;product&quot;: null
+                },
+                &quot;deleted_at&quot;: null,
+                &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-06-05T15:27:36.000000Z&quot;
+            },
+            {
+                &quot;id&quot;: 18,
+                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
+                &quot;from&quot;: 1,
+                &quot;to&quot;: 1,
+                &quot;from_data&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;dob&quot;: &quot;2020-05-19&quot;,
+                    &quot;name&quot;: &quot;usertest&quot;,
+                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
+                    &quot;image&quot;: null,
+                    &quot;phone&quot;: &quot;082117222360&quot;,
+                    &quot;gender&quot;: 1,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;id_number&quot;: null,
+                    &quot;user_type&quot;: 3,
+                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;pg_card_number&quot;: null,
+                    &quot;last_sign_in_at&quot;: null,
+                    &quot;email_verified_at&quot;: null,
+                    &quot;phone_verified_at&quot;: &quot;2021-06-04 22:54:47&quot;
+                },
+                &quot;to_data&quot;: {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;usertest&quot;,
+                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
+                    &quot;phone&quot;: &quot;082117222360&quot;,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;user_type&quot;: 2,
+                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
+                    &quot;last_sign_in_at&quot;: null
+                },
+                &quot;data&quot;: {
+                    &quot;type&quot;: &quot;text&quot;,
+                    &quot;image&quot;: null,
+                    &quot;is_read&quot;: true,
+                    &quot;message&quot;: &quot;hi go 123&quot;,
+                    &quot;product&quot;: null
+                },
+                &quot;deleted_at&quot;: null,
+                &quot;created_at&quot;: &quot;2021-06-05T14:54:39.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2021-06-05T15:27:36.000000Z&quot;
+            },
+            ...
+        ],
+        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/chat?page=1&quot;,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 1,
+        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/chat?page=1&quot;,
+        &quot;next_page_url&quot;: null,
+        &quot;path&quot;: &quot;http://localhost:8000/api/chat&quot;,
+        &quot;per_page&quot;: 10,
+        &quot;prev_page_url&quot;: null,
+        &quot;to&quot;: 8,
+        &quot;total&quot;: 8
+    },
+    &quot;message&quot;: &quot;&quot;
+}</code></pre>
+<h2 id="mark-as-read---last-chat-contact-1">Mark as read - Last Chat Contact</h2>
+<h3 id="protokol-3">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event-1">Event :</h3>
+<p><code>runner-mark-as-read</code></p>
+<h3 id="data-payload-1">Data Payload :</h3>
+<pre><code>{
+    id: integer|last_chat_contact.id,
+    to: integer,
+    to_type: integer|3=runner,2=admin
+}
+</code></pre>
+<h3 id="example-2">Example :</h3>
+<pre><code>socket.emit(&#39;runner-mark-as-read&#39;, {
+    id: integer,
+    to: integer,
+    to_type: integer|3=runner,2=admin
+});
+
+socket.on(&#39;runner-mark-as-read&#39;, function (data) {
+    console.log(data);
+});
+</code></pre>
+<p><strong>Data Callback</strong></p>
+<pre><code>{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        47,
+        48
+    ],
+    &quot;message&quot;: &quot;Berhasil update status read&quot;
+}
+</code></pre>
+<h2 id="listen-online-user---last-chat-contact">Listen Online User - Last Chat Contact</h2>
+<h3 id="protokol-4">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event-2">Event :</h3>
+<p><code>user-online</code></p>
+<h3 id="data-payload-2">Data Payload :</h3>
+<pre><code>[
+    {
+        socket_id: &quot;J7FdltfukpktsmimAAAA&quot;
+        user_id: &quot;1&quot;
+        user_type: &quot;3&quot;
+    },
+    {
+        socket_id: &quot;J7FdltfukpktsmimAAAe&quot;
+        user_id: &quot;2&quot;
+        user_type: &quot;2&quot;
+    },
+]
+</code></pre>
+<h3 id="example-3">Example :</h3>
+<pre><code>
+socket.on(&#39;user-online&#39;, function (data) {
+    console.log(data);
+});
+</code></pre>
+<h2 id="send-broadcast">Send Broadcast</h2>
+<h3 id="protokol-5">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event-3">Event :</h3>
+<p><code>runner-broadcast</code></p>
+<h3 id="data-payload-3">Data Payload :</h3>
+<pre><code>
+{
+    &quot;from&quot;: integer,
+    &quot;from_type&quot;: integer|3=runner,2=admin,
+    &quot;to&quot;: array[],
+    &quot;to_type&quot;: integer|3=runner,2=admin,
+    &quot;type&quot;: string|text,product,image,
+    &quot;message&quot;: string,
+    &quot;product_id&quot;: integer,
+    &quot;variant_id&quot;: integer,
+    &quot;image&quot;: base64
+}
+</code></pre>
+<h3 id="example-4">Example :</h3>
+<pre><code>socket.emit(&#39;runner-send-chatting&#39;, {
+    &quot;from&quot;: integer,
+    &quot;from_type&quot;: integer|3=runner,2=admin,
+    &quot;to&quot;: array[],
+    &quot;to_type&quot;: integer|3=runner,2=admin,
+    &quot;type&quot;: string|text,product,image,
+    &quot;message&quot;: string,
+    &quot;product&quot;: integer,
+    &quot;variant_id&quot;: integer,
+    &quot;image&quot;: base64
+});
+
+socket.on(&#39;runner-send-chatting&#39;, function(data){
+    console.log(data);
+});</code></pre>
+<p><strong>Data Callback</strong></p>
+<pre><code>{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [{
+        &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
+        &quot;from&quot;: 1,
+        &quot;to&quot;: 1,
+        &quot;from_data&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;usertest&quot;,
+            &quot;image&quot;: null,
+            &quot;user_type&quot;: 1
+        },
+        &quot;to_data&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;usertest&quot;,
+            &quot;last_sign_in_at&quot;: null,
+            &quot;user_type&quot;: 2
+        },
+        &quot;data&quot;: {
+            &quot;message&quot;: &quot;hi go 123&quot;,
+            &quot;product&quot;: {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Carla Levy&quot;,
+                &quot;image&quot;: &quot;9a8601cefa6cc152809da4d47db785bd.png&quot;,
+                &quot;price&quot;: 80000,
+                &quot;link&quot;: &quot;http://localhost:8000/product/2&quot;
+            },
+            &quot;image&quot;: null,
+            &quot;is_read&quot;: false,
+            &quot;type&quot;: &quot;text&quot;
+        },
+        &quot;updated_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
+        &quot;id&quot;: 19
+    }],
+    &quot;message&quot;: &quot;Berhasil simpan data&quot;
+}
+</code></pre>
+<h2 id="typing-handler">Typing Handler</h2>
+<h3 id="protokol-6">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event-4">Event :</h3>
+<p><code>runner-typing</code></p>
+<h3 id="data-payload-4">Data Payload :</h3>
+<pre><code>{
+    user_id: integer  |get from auth login,
+    user_type: integer| 3=runner,2=admin
+    user_name: string | get from auth login
+    typing: true
+}</code></pre>
+<h3 id="example-5">Example :</h3>
+<pre><code>    socket.emit(&#39;runner-typing&#39;, {
+        user_id: this.auth.id,
+        user_type: this.auth.type,
+        user_name: this.auth.name,
+        typig: true
+    });</code></pre>
+<h3 id="usage">Usage :</h3>
+<p>
+Get <code>data.typing</code> from <code>api/runner/last-chat-contact</code>.
+</p>
+<p>
+Then watch/listen on socket <code>typing</code> event while update your state like these below:
+</p>
+
+<pre><code>  updateTypingLastChatUsers(state, payload) {
+    if(state.lastChatUsers) {
+      state.lastChatUsers.map((item) =&gt; {
+        if(payload.user_id == item.to_data.id &amp;&amp; payload.user_type == item.to_data.user_type) {
+          item.typing = payload.typing;
+        }
+        if(state.userChat) {
+          if(payload.user_id == state.userChat.id &amp;&amp; payload.user_type == state.userChat.type) {
+            state.userChat.typing = payload.typing;
+          }
+        }
+        return item;
+      });
+    }
+  },</code></pre>
