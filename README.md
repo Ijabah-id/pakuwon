@@ -41,7 +41,7 @@ var socket = io("http://localhost:3000?user_type=1&user_id=1);
     "from_type": integer|1=user,2=admin,
     "to": integer,
     "to_type": integer|1=user,2=admin,
-    "type": string|text,product,image,
+    "type": string|text,product,image,video,file
     "message": string,
     "product_id": integer,
     "variant_id": integer,
