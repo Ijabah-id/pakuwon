@@ -62,7 +62,8 @@ socket.emit('send-chatting', {
     "message": string,
     "product": integer,
     "variant_id": integer,
-    "image": base64
+    "image": base64,
+    "mall_id": integer (get from mobile)
 }, (data) => {
     //code for callback
 });
