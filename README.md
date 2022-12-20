@@ -144,6 +144,7 @@ socket.on('send-chatting', function(data){
 {
     user_type: integer|1=user,2=admin,
     user_id: integer
+    mall_id: int
 }
 ```
 
