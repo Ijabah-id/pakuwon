@@ -11,14 +11,15 @@
 ```
 {
     user_type: integer|1=user,2=admin,
-    user_id: integer
+    user_id: integer,
+    mall_id: integer (get from selected mall)
 }
 ```
 
 ### Example 
 
 ```
-var socket = io("http://localhost:3000?user_type=1&user_id=1);
+var socket = io("http://localhost:3000?user_type=1&user_id=1&mall_id=1);
 ```
 
 
