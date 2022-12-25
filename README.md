@@ -19,7 +19,7 @@
 ### Example 
 
 ```
-var socket = io("http://localhost:3000?user_type=1&user_id=1&mall_id=1);
+var socket = io("http://localhost:3000?mall-{mall_id}?user_id=1&user_type=1&mall_id=1);
 ```
 
 
