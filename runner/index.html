@@ -1,449 +1,440 @@
 <h1 id="fitur-runner-chatting">Fitur Runner Chatting</h1>
-<h2 id="connect-to-socket.io">Connect to Socket.io</h2>
+<h2 id="connect-to-socket-io">Connect to Socket.io</h2>
 <h3 id="end-point">End Point</h3>
 <p><code>http://localhost:3000</code></p>
 <h3 id="params">Params</h3>
 <pre><code>{
-    user_type: integer|3=runner,2=admin,
-    user_id: integer,
-    token: TOKEN
-}</code></pre>
-<h3 id="example">Example</h3>
-<pre><code>var socket = io(&quot;http://localhost:3000?user_type=3&amp;user_id=1&amp;token=UGFrdXdvbkdyb3VwOkJsbzNXZWJlV2E0QmV5Q3hPbnlo);</code></pre>
-<h2 id="send-chat">Send Chat</h2>
-<h3 id="protokol">Protokol :</h3>
+    user_type: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    user_id: <span class="hljs-built_in">integer</span>,
+    token: TOKEN,
+    mall_id: <span class="hljs-built_in">integer</span> (<span class="hljs-keyword">get</span> <span class="hljs-keyword">from</span> selected mall)
+}
+</code></pre><h3 id="example">Example</h3>
+<pre><code><span class="xml">var socket = io("http://localhost:3000/mall-</span><span class="hljs-template-variable">{mall_id}</span><span class="xml">?user_type=3&amp;user_id=1&amp;mall_id=</span><span class="hljs-template-variable">{mall_id}</span><span class="xml">&amp;token=UGFrdXdvbkdyb3VwOkJsbzNXZWJlV2E0QmV5Q3hPbnlo);</span>
+</code></pre><h2 id="send-chat">Send Chat</h2>
+<h3 id="protokol-">Protokol :</h3>
 <p><code>WS Socket.io</code></p>
-<h3 id="event">Event :</h3>
+<h3 id="event-">Event :</h3>
 <p><code>runner-send-chatting</code></p>
-<h3 id="data-payload">Data Payload :</h3>
+<h3 id="data-payload-">Data Payload :</h3>
 <pre><code>
 {
-    &quot;from&quot;: integer,
-    &quot;from_type&quot;: integer|3=runner,2=admin,
-    &quot;to&quot;: integer,
-    &quot;to_type&quot;: integer|3=runner,2=admin,
-    &quot;type&quot;: string|text,product,image,video,file
-    &quot;message&quot;: string,
-    &quot;product_id&quot;: integer,
-    &quot;variant_id&quot;: integer,
-    &quot;image&quot;: base64
+    <span class="hljs-string">"from"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"from_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"to"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"to_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"type"</span>: <span class="hljs-built_in">string</span>|text,<span class="hljs-built_in">product</span>,<span class="hljs-built_in">image</span>,
+    <span class="hljs-string">"message"</span>: <span class="hljs-built_in">string</span>,
+    <span class="hljs-string">"product_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"variant_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"image"</span>: <span class="hljs-built_in">base64</span>,
+    <span class="hljs-string">"mall_id"</span>: <span class="hljs-built_in">integer</span>
 }
-</code></pre>
-<h3 id="example-1">Example :</h3>
-<pre><code>socket.emit(&#39;runner-send-chatting&#39;, {
-    &quot;from&quot;: integer,
-    &quot;from_type&quot;: integer|3=runner,2=admin,
-    &quot;to&quot;: integer,
-    &quot;to_type&quot;: integer|3=runner,2=admin,
-    &quot;type&quot;: string|text,product,image,video,file
-    &quot;message&quot;: string,
-    &quot;product&quot;: integer,
-    &quot;variant_id&quot;: integer,
-    &quot;image&quot;: base64
-}, (data) =&gt; {
-    //code for callback
+</code></pre><h3 id="example-">Example :</h3>
+<pre><code>socket.emit(<span class="hljs-string">'runner-send-chatting'</span>, {
+    <span class="hljs-string">"from"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"from_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"to"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"to_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"type"</span>: <span class="hljs-built_in">string</span>|text,product,image,
+    <span class="hljs-string">"message"</span>: <span class="hljs-built_in">string</span>,
+    <span class="hljs-string">"product"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"variant_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"image"</span>: base64,
+    <span class="hljs-string">"mall_id"</span>: <span class="hljs-built_in">integer</span>
+}, (<span class="hljs-built_in">data</span>) =&gt; {
+    <span class="hljs-comment">//code for callback</span>
 });
 
-socket.on(&#39;runner-send-chatting&#39;, function(data){
-    console.log(data);
-});</code></pre>
-<p><strong>Data Callback</strong></p>
+socket.<span class="hljs-keyword">on</span>(<span class="hljs-string">'runner-send-chatting'</span>, function(<span class="hljs-built_in">data</span>){
+    console.<span class="hljs-keyword">log</span>(<span class="hljs-built_in">data</span>);
+});
+</code></pre><p><strong>Data Callback</strong></p>
 <pre><code>{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
-        &quot;from&quot;: 1,
-        &quot;to&quot;: 1,
-        &quot;from_data&quot;: {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;usertest&quot;,
-            &quot;image&quot;: null,
-            &quot;user_type&quot;: 3
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"channel"</span>: <span class="hljs-string">"e4da3b7fbbce2345d7772b0674a318d5"</span>,
+        <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"from_data"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+            <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">3</span>
         },
-        &quot;to_data&quot;: {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;usertest&quot;,
-            &quot;last_sign_in_at&quot;: null,
-            &quot;user_type&quot;: 2
+        <span class="hljs-attr">"to_data"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+            <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">2</span>
         },
-        &quot;data&quot;: {
-            &quot;message&quot;: &quot;hi go 123&quot;,
-            &quot;product&quot;: {
-                &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Carla Levy&quot;,
-                &quot;image&quot;: &quot;9a8601cefa6cc152809da4d47db785bd.png&quot;,
-                &quot;price&quot;: 80000,
-                &quot;link&quot;: &quot;http://localhost:8000/product/2&quot;
+        <span class="hljs-attr">"data"</span>: {
+            <span class="hljs-attr">"message"</span>: <span class="hljs-string">"hi go 123"</span>,
+            <span class="hljs-attr">"product"</span>: {
+                <span class="hljs-attr">"id"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Carla Levy"</span>,
+                <span class="hljs-attr">"image"</span>: <span class="hljs-string">"9a8601cefa6cc152809da4d47db785bd.png"</span>,
+                <span class="hljs-attr">"price"</span>: <span class="hljs-number">80000</span>,
+                <span class="hljs-attr">"link"</span>: <span class="hljs-string">"http://localhost:8000/product/2"</span>
             },
-            &quot;image&quot;: null,
-            &quot;is_read&quot;: false,
-            &quot;type&quot;: &quot;text&quot;
+            <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"is_read"</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>
         },
-        &quot;updated_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
-        &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
-        &quot;id&quot;: 19
+        <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-05T14:56:05.000000Z"</span>,
+        <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-05T14:56:05.000000Z"</span>,
+        <span class="hljs-attr">"id"</span>: <span class="hljs-number">19</span>
     },
-    &quot;message&quot;: &quot;Berhasil simpan data&quot;
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Berhasil simpan data"</span>
 }
-</code></pre>
-<h2 id="last-chat-contact">Last Chat Contact</h2>
-<h3 id="protokol-1">Protokol</h3>
+</code></pre><h2 id="last-chat-contact">Last Chat Contact</h2>
+<h3 id="protokol">Protokol</h3>
 <p><code>REST API</code></p>
 <h3 id="request">Request</h3>
 <p><strong>Method</strong> : <code>GET</code></p>
 <p><strong>URL</strong> : <code>/api/runner/last-chat-contact</code></p>
-<p><strong>Headers</strong> :</p>
+<p><strong>Headers</strong> : </p>
 <pre><code>{
-    &#39;Accept&#39;: &#39;application/json&#39;,
-    &#39;Content-type: &#39;application/json&#39; 
-}</code></pre>
-<p><strong>Params</strong> :</p>
+    <span class="hljs-symbol">'Accept'</span>: <span class="hljs-symbol">'application</span>/json',
+    <span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">type</span>: <span class="hljs-symbol">'application</span>/json' 
+}
+</code></pre><p><strong>Params</strong> :</p>
 <pre><code>{
-    user_type: integer|3=runner,2=admin,
-    user_id: integer
-}</code></pre>
-<h3 id="response">Response</h3>
+    <span class="hljs-attribute">user_type</span>: integer|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    user_id: integer,
+    mall_id: integer
+}
+</code></pre><h3 id="response">Response</h3>
 <pre><code>{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"current_page"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"data"</span>: [
             {
-                &quot;id&quot;: 3,
-                &quot;user_id&quot;: 1,
-                &quot;user_type&quot;: 3,
-                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
-                &quot;to&quot;: 1,
-                &quot;to_data&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;name&quot;: &quot;usertest&quot;,
-                    &quot;user_type&quot;: 2,
+                <span class="hljs-attr">"id"</span>: <span class="hljs-number">3</span>,
+                <span class="hljs-attr">"user_id"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">3</span>,
+                <span class="hljs-attr">"channel"</span>: <span class="hljs-string">"e4da3b7fbbce2345d7772b0674a318d5"</span>,
+                <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"to_data"</span>: {
+                    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+                    <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">2</span>,
                 },
-                &quot;last_data&quot;: {
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;image&quot;: null,
-                    &quot;is_read&quot;: false,
-                    &quot;message&quot;: &quot;ulala&quot;,
-                    &quot;product&quot;: null
+                <span class="hljs-attr">"last_data"</span>: {
+                    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                    <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"is_read"</span>: <span class="hljs-literal">false</span>,
+                    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"ulala"</span>,
+                    <span class="hljs-attr">"product"</span>: <span class="hljs-literal">null</span>
                 },
-                &quot;is_read&quot;: 1,
-                &quot;deleted_at&quot;: null,
-                &quot;created_at&quot;: &quot;2021-06-05T14:22:37.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2021-06-05T17:22:05.000000Z&quot;
+                <span class="hljs-attr">"is_read"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"deleted_at"</span>: <span class="hljs-literal">null</span>,
+                <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-05T14:22:37.000000Z"</span>,
+                <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-05T17:22:05.000000Z"</span>
             }
         ],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/last-chat-contact?page=1&quot;,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/last-chat-contact?page=1&quot;,
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/last-chat-contact&quot;,
-        &quot;per_page&quot;: 10,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 1,
-        &quot;total&quot;: 1
+        <span class="hljs-attr">"first_page_url"</span>: <span class="hljs-string">"http://localhost:8000/api/last-chat-contact?page=1"</span>,
+        <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"last_page"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"last_page_url"</span>: <span class="hljs-string">"http://localhost:8000/api/last-chat-contact?page=1"</span>,
+        <span class="hljs-attr">"next_page_url"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"path"</span>: <span class="hljs-string">"http://localhost:8000/api/last-chat-contact"</span>,
+        <span class="hljs-attr">"per_page"</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-attr">"prev_page_url"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">1</span>
     },
-    &quot;message&quot;: null
+    <span class="hljs-attr">"message"</span>: <span class="hljs-literal">null</span>
 }
-</code></pre>
-<h2 id="history-chat">History Chat</h2>
-<h2 id="mark-as-read---last-chat-contact">Mark as read - Last Chat Contact</h2>
-<h3 id="protokol-2">Protokol</h3>
+</code></pre><h2 id="history-chat">History Chat</h2>
+<h2 id="mark-as-read-last-chat-contact">Mark as read - Last Chat Contact</h2>
+<h3 id="protokol">Protokol</h3>
 <p><code>REST API</code></p>
-<h3 id="request-1">Request</h3>
+<h3 id="request">Request</h3>
 <p><strong>Method</strong> : <code>GET</code></p>
 <p><strong>URL</strong> : <code>/api/runner/chat</code></p>
-<p><strong>Headers</strong> :</p>
+<p><strong>Headers</strong> : </p>
 <pre><code>{
-    &#39;Accept&#39;: &#39;application/json&#39;,
-    &#39;Content-type: &#39;application/json&#39; 
-}</code></pre>
-<p><strong>Params</strong> :</p>
+    <span class="hljs-symbol">'Accept'</span>: <span class="hljs-symbol">'application</span>/json',
+    <span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">type</span>: <span class="hljs-symbol">'application</span>/json' 
+}
+</code></pre><p><strong>Params</strong> :</p>
 <pre><code>{
-    channel: string
-}</code></pre>
-<h3 id="response-1">Response</h3>
+    <span class="hljs-attribute">channel</span>: string
+}
+</code></pre><h3 id="response">Response</h3>
 <pre><code>{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"current_page"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"data"</span>: [
             {
-                &quot;id&quot;: 19,
-                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
-                &quot;from&quot;: 1,
-                &quot;to&quot;: 1,
-                &quot;from_data&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;dob&quot;: &quot;2020-05-19&quot;,
-                    &quot;name&quot;: &quot;usertest&quot;,
-                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
-                    &quot;image&quot;: null,
-                    &quot;phone&quot;: &quot;082117222360&quot;,
-                    &quot;gender&quot;: 1,
-                    &quot;status&quot;: &quot;active&quot;,
-                    &quot;id_number&quot;: null,
-                    &quot;user_type&quot;: 3,
-                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;pg_card_number&quot;: null,
-                    &quot;last_sign_in_at&quot;: null,
-                    &quot;email_verified_at&quot;: null,
-                    &quot;phone_verified_at&quot;: &quot;2021-06-04 22:54:47&quot;
+                <span class="hljs-attr">"id"</span>: <span class="hljs-number">19</span>,
+                <span class="hljs-attr">"channel"</span>: <span class="hljs-string">"e4da3b7fbbce2345d7772b0674a318d5"</span>,
+                <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"from_data"</span>: {
+                    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"dob"</span>: <span class="hljs-string">"2020-05-19"</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+                    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"muhamad.rizky1996@gmail.com"</span>,
+                    <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"082117222360"</span>,
+                    <span class="hljs-attr">"gender"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+                    <span class="hljs-attr">"id_number"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">3</span>,
+                    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"pg_card_number"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"email_verified_at"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"phone_verified_at"</span>: <span class="hljs-string">"2021-06-04 22:54:47"</span>
                 },
-                &quot;to_data&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;name&quot;: &quot;usertest&quot;,
-                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
-                    &quot;phone&quot;: &quot;082117222360&quot;,
-                    &quot;status&quot;: &quot;active&quot;,
-                    &quot;user_type&quot;: 2,
-                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;last_sign_in_at&quot;: null
+                <span class="hljs-attr">"to_data"</span>: {
+                    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+                    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"muhamad.rizky1996@gmail.com"</span>,
+                    <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"082117222360"</span>,
+                    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+                    <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>
                 },
-                &quot;data&quot;: {
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;image&quot;: null,
-                    &quot;is_read&quot;: true,
-                    &quot;message&quot;: &quot;hi go 123&quot;,
-                    &quot;product&quot;: null
+                <span class="hljs-attr">"data"</span>: {
+                    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                    <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"is_read"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"hi go 123"</span>,
+                    <span class="hljs-attr">"product"</span>: <span class="hljs-literal">null</span>
                 },
-                &quot;deleted_at&quot;: null,
-                &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2021-06-05T15:27:36.000000Z&quot;
+                <span class="hljs-attr">"deleted_at"</span>: <span class="hljs-literal">null</span>,
+                <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-05T14:56:05.000000Z"</span>,
+                <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-05T15:27:36.000000Z"</span>
             },
             {
-                &quot;id&quot;: 18,
-                &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
-                &quot;from&quot;: 1,
-                &quot;to&quot;: 1,
-                &quot;from_data&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;dob&quot;: &quot;2020-05-19&quot;,
-                    &quot;name&quot;: &quot;usertest&quot;,
-                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
-                    &quot;image&quot;: null,
-                    &quot;phone&quot;: &quot;082117222360&quot;,
-                    &quot;gender&quot;: 1,
-                    &quot;status&quot;: &quot;active&quot;,
-                    &quot;id_number&quot;: null,
-                    &quot;user_type&quot;: 3,
-                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;pg_card_number&quot;: null,
-                    &quot;last_sign_in_at&quot;: null,
-                    &quot;email_verified_at&quot;: null,
-                    &quot;phone_verified_at&quot;: &quot;2021-06-04 22:54:47&quot;
+                <span class="hljs-attr">"id"</span>: <span class="hljs-number">18</span>,
+                <span class="hljs-attr">"channel"</span>: <span class="hljs-string">"e4da3b7fbbce2345d7772b0674a318d5"</span>,
+                <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+                <span class="hljs-attr">"from_data"</span>: {
+                    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"dob"</span>: <span class="hljs-string">"2020-05-19"</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+                    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"muhamad.rizky1996@gmail.com"</span>,
+                    <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"082117222360"</span>,
+                    <span class="hljs-attr">"gender"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+                    <span class="hljs-attr">"id_number"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">3</span>,
+                    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"pg_card_number"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"email_verified_at"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"phone_verified_at"</span>: <span class="hljs-string">"2021-06-04 22:54:47"</span>
                 },
-                &quot;to_data&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;name&quot;: &quot;usertest&quot;,
-                    &quot;email&quot;: &quot;muhamad.rizky1996@gmail.com&quot;,
-                    &quot;phone&quot;: &quot;082117222360&quot;,
-                    &quot;status&quot;: &quot;active&quot;,
-                    &quot;user_type&quot;: 2,
-                    &quot;created_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2021-06-04T15:54:47.000000Z&quot;,
-                    &quot;last_sign_in_at&quot;: null
+                <span class="hljs-attr">"to_data"</span>: {
+                    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+                    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"muhamad.rizky1996@gmail.com"</span>,
+                    <span class="hljs-attr">"phone"</span>: <span class="hljs-string">"082117222360"</span>,
+                    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+                    <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-04T15:54:47.000000Z"</span>,
+                    <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>
                 },
-                &quot;data&quot;: {
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;image&quot;: null,
-                    &quot;is_read&quot;: true,
-                    &quot;message&quot;: &quot;hi go 123&quot;,
-                    &quot;product&quot;: null
+                <span class="hljs-attr">"data"</span>: {
+                    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+                    <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+                    <span class="hljs-attr">"is_read"</span>: <span class="hljs-literal">true</span>,
+                    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"hi go 123"</span>,
+                    <span class="hljs-attr">"product"</span>: <span class="hljs-literal">null</span>
                 },
-                &quot;deleted_at&quot;: null,
-                &quot;created_at&quot;: &quot;2021-06-05T14:54:39.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2021-06-05T15:27:36.000000Z&quot;
+                <span class="hljs-attr">"deleted_at"</span>: <span class="hljs-literal">null</span>,
+                <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-05T14:54:39.000000Z"</span>,
+                <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-05T15:27:36.000000Z"</span>
             },
             ...
         ],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/chat?page=1&quot;,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 1,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/chat?page=1&quot;,
-        &quot;next_page_url&quot;: null,
-        &quot;path&quot;: &quot;http://localhost:8000/api/chat&quot;,
-        &quot;per_page&quot;: 10,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 8,
-        &quot;total&quot;: 8
+        <span class="hljs-attr">"first_page_url"</span>: <span class="hljs-string">"http://localhost:8000/api/chat?page=1"</span>,
+        <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"last_page"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"last_page_url"</span>: <span class="hljs-string">"http://localhost:8000/api/chat?page=1"</span>,
+        <span class="hljs-attr">"next_page_url"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"path"</span>: <span class="hljs-string">"http://localhost:8000/api/chat"</span>,
+        <span class="hljs-attr">"per_page"</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-attr">"prev_page_url"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"to"</span>: <span class="hljs-number">8</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">8</span>
     },
-    &quot;message&quot;: &quot;&quot;
-}</code></pre>
-<h2 id="mark-as-read---last-chat-contact-1">Mark as read - Last Chat Contact</h2>
-<h3 id="protokol-3">Protokol :</h3>
-<p><code>WS Socket.io</code></p>
-<h3 id="event-1">Event :</h3>
-<p><code>runner-mark-as-read</code></p>
-<h3 id="data-payload-1">Data Payload :</h3>
-<pre><code>{
-    id: integer|last_chat_contact.id,
-    to: integer,
-    to_type: integer|3=runner,2=admin
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">""</span>
 }
-</code></pre>
-<h3 id="example-2">Example :</h3>
-<pre><code>socket.emit(&#39;runner-mark-as-read&#39;, {
-    id: integer,
-    to: integer,
-    to_type: integer|3=runner,2=admin
+</code></pre><h2 id="mark-as-read-last-chat-contact">Mark as read - Last Chat Contact</h2>
+<h3 id="protokol-">Protokol :</h3>
+<p><code>WS Socket.io</code></p>
+<h3 id="event-">Event :</h3>
+<p><code>runner-mark-as-read</code></p>
+<h3 id="data-payload-">Data Payload :</h3>
+<pre><code>{
+    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">integer</span>|last_chat_contact.<span class="hljs-built_in">id</span>,
+    <span class="hljs-keyword">to</span>: <span class="hljs-built_in">integer</span>,
+    to_type: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin
+}
+</code></pre><h3 id="example-">Example :</h3>
+<pre><code>socket.emit('runner-mark-<span class="hljs-keyword">as</span>-<span class="hljs-built_in">read</span>', {
+    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-keyword">to</span>: <span class="hljs-built_in">integer</span>,
+    to_type: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin
 });
 
-socket.on(&#39;runner-mark-as-read&#39;, function (data) {
-    console.log(data);
+socket.<span class="hljs-keyword">on</span>('runner-mark-<span class="hljs-keyword">as</span>-<span class="hljs-built_in">read</span>', function (data) {
+    console.<span class="hljs-built_in">log</span>(data);
 });
-</code></pre>
-<p><strong>Data Callback</strong></p>
+</code></pre><p><strong>Data Callback</strong></p>
 <pre><code>{
-    &quot;success&quot;: true,
-    &quot;data&quot;: [
-        47,
-        48
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: [
+        <span class="hljs-number">47</span>,
+        <span class="hljs-number">48</span>
     ],
-    &quot;message&quot;: &quot;Berhasil update status read&quot;
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Berhasil update status read"</span>
 }
-</code></pre>
-<h2 id="listen-online-user---last-chat-contact">Listen Online User - Last Chat Contact</h2>
-<h3 id="protokol-4">Protokol :</h3>
+</code></pre><h2 id="listen-online-user-last-chat-contact">Listen Online User - Last Chat Contact</h2>
+<h3 id="protokol-">Protokol :</h3>
 <p><code>WS Socket.io</code></p>
-<h3 id="event-2">Event :</h3>
+<h3 id="event-">Event :</h3>
 <p><code>user-online</code></p>
-<h3 id="data-payload-2">Data Payload :</h3>
+<h3 id="data-payload-">Data Payload :</h3>
 <pre><code>[
     {
-        socket_id: &quot;J7FdltfukpktsmimAAAA&quot;
-        user_id: &quot;1&quot;
-        user_type: &quot;3&quot;
+<span class="hljs-symbol">        socket_id:</span> <span class="hljs-string">"J7FdltfukpktsmimAAAA"</span>
+<span class="hljs-symbol">        user_id:</span> <span class="hljs-string">"1"</span>
+<span class="hljs-symbol">        user_type:</span> <span class="hljs-string">"3"</span>
     },
     {
-        socket_id: &quot;J7FdltfukpktsmimAAAe&quot;
-        user_id: &quot;2&quot;
-        user_type: &quot;2&quot;
+<span class="hljs-symbol">        socket_id:</span> <span class="hljs-string">"J7FdltfukpktsmimAAAe"</span>
+<span class="hljs-symbol">        user_id:</span> <span class="hljs-string">"2"</span>
+<span class="hljs-symbol">        user_type:</span> <span class="hljs-string">"2"</span>
     },
 ]
-</code></pre>
-<h3 id="example-3">Example :</h3>
+</code></pre><h3 id="example-">Example :</h3>
 <pre><code>
-socket.on(&#39;user-online&#39;, function (data) {
+socket.<span class="hljs-keyword">on</span>(<span class="hljs-string">'user-online'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> <span class="hljs-comment">{
     console.log(data);
-});
-</code></pre>
-<h2 id="send-broadcast">Send Broadcast</h2>
-<h3 id="protokol-5">Protokol :</h3>
+}</span>);</span>
+</code></pre><h2 id="send-broadcast">Send Broadcast</h2>
+<h3 id="protokol-">Protokol :</h3>
 <p><code>WS Socket.io</code></p>
-<h3 id="event-3">Event :</h3>
+<h3 id="event-">Event :</h3>
 <p><code>runner-broadcast</code></p>
-<h3 id="data-payload-3">Data Payload :</h3>
+<h3 id="data-payload-">Data Payload :</h3>
 <pre><code>
 {
-    &quot;from&quot;: integer,
-    &quot;from_type&quot;: integer|3=runner,2=admin,
-    &quot;to&quot;: array[],
-    &quot;to_type&quot;: integer|3=runner,2=admin,
-    &quot;type&quot;: string|text,product,image,
-    &quot;message&quot;: string,
-    &quot;product_id&quot;: integer,
-    &quot;variant_id&quot;: integer,
-    &quot;image&quot;: base64
+    <span class="hljs-string">"from"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"from_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"to"</span>: <span class="hljs-built_in">array</span>[],
+    <span class="hljs-string">"to_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"type"</span>: <span class="hljs-built_in">string</span>|text,<span class="hljs-built_in">product</span>,<span class="hljs-built_in">image</span>,
+    <span class="hljs-string">"message"</span>: <span class="hljs-built_in">string</span>,
+    <span class="hljs-string">"product_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"variant_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"image"</span>: <span class="hljs-built_in">base64</span>
 }
-</code></pre>
-<h3 id="example-4">Example :</h3>
-<pre><code>socket.emit(&#39;runner-send-chatting&#39;, {
-    &quot;from&quot;: integer,
-    &quot;from_type&quot;: integer|3=runner,2=admin,
-    &quot;to&quot;: array[],
-    &quot;to_type&quot;: integer|3=runner,2=admin,
-    &quot;type&quot;: string|text,product,image,
-    &quot;message&quot;: string,
-    &quot;product&quot;: integer,
-    &quot;variant_id&quot;: integer,
-    &quot;image&quot;: base64
+</code></pre><h3 id="example-">Example :</h3>
+<pre><code>socket.emit('runner-send-chatting', {
+    <span class="hljs-string">"from"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"from_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"to"</span>: <span class="hljs-built_in">array</span>[],
+    <span class="hljs-string">"to_type"</span>: <span class="hljs-built_in">integer</span>|<span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin,
+    <span class="hljs-string">"type"</span>: <span class="hljs-built_in">string</span>|text,<span class="hljs-built_in">product</span>,<span class="hljs-built_in">image</span>,
+    <span class="hljs-string">"message"</span>: <span class="hljs-built_in">string</span>,
+    <span class="hljs-string">"product"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"variant_id"</span>: <span class="hljs-built_in">integer</span>,
+    <span class="hljs-string">"image"</span>: <span class="hljs-built_in">base64</span>
 });
 
-socket.on(&#39;runner-send-chatting&#39;, function(data){
-    console.log(data);
-});</code></pre>
-<p><strong>Data Callback</strong></p>
+socket.on('runner-send-chatting', function(data){
+    console.<span class="hljs-built_in">log</span>(data);
+});
+</code></pre><p><strong>Data Callback</strong></p>
 <pre><code>{
-    &quot;success&quot;: true,
-    &quot;data&quot;: [{
-        &quot;channel&quot;: &quot;e4da3b7fbbce2345d7772b0674a318d5&quot;,
-        &quot;from&quot;: 1,
-        &quot;to&quot;: 1,
-        &quot;from_data&quot;: {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;usertest&quot;,
-            &quot;image&quot;: null,
-            &quot;user_type&quot;: 1
+    <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: [{
+        <span class="hljs-attr">"channel"</span>: <span class="hljs-string">"e4da3b7fbbce2345d7772b0674a318d5"</span>,
+        <span class="hljs-attr">"from"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"to"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"from_data"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+            <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">1</span>
         },
-        &quot;to_data&quot;: {
-            &quot;id&quot;: 1,
-            &quot;name&quot;: &quot;usertest&quot;,
-            &quot;last_sign_in_at&quot;: null,
-            &quot;user_type&quot;: 2
+        <span class="hljs-attr">"to_data"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"usertest"</span>,
+            <span class="hljs-attr">"last_sign_in_at"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"user_type"</span>: <span class="hljs-number">2</span>
         },
-        &quot;data&quot;: {
-            &quot;message&quot;: &quot;hi go 123&quot;,
-            &quot;product&quot;: {
-                &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Carla Levy&quot;,
-                &quot;image&quot;: &quot;9a8601cefa6cc152809da4d47db785bd.png&quot;,
-                &quot;price&quot;: 80000,
-                &quot;link&quot;: &quot;http://localhost:8000/product/2&quot;
+        <span class="hljs-attr">"data"</span>: {
+            <span class="hljs-attr">"message"</span>: <span class="hljs-string">"hi go 123"</span>,
+            <span class="hljs-attr">"product"</span>: {
+                <span class="hljs-attr">"id"</span>: <span class="hljs-number">2</span>,
+                <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Carla Levy"</span>,
+                <span class="hljs-attr">"image"</span>: <span class="hljs-string">"9a8601cefa6cc152809da4d47db785bd.png"</span>,
+                <span class="hljs-attr">"price"</span>: <span class="hljs-number">80000</span>,
+                <span class="hljs-attr">"link"</span>: <span class="hljs-string">"http://localhost:8000/product/2"</span>
             },
-            &quot;image&quot;: null,
-            &quot;is_read&quot;: false,
-            &quot;type&quot;: &quot;text&quot;
+            <span class="hljs-attr">"image"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"is_read"</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>
         },
-        &quot;updated_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
-        &quot;created_at&quot;: &quot;2021-06-05T14:56:05.000000Z&quot;,
-        &quot;id&quot;: 19
+        <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2021-06-05T14:56:05.000000Z"</span>,
+        <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2021-06-05T14:56:05.000000Z"</span>,
+        <span class="hljs-attr">"id"</span>: <span class="hljs-number">19</span>
     }],
-    &quot;message&quot;: &quot;Berhasil simpan data&quot;
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Berhasil simpan data"</span>
 }
-</code></pre>
-<h2 id="typing-handler">Typing Handler</h2>
-<h3 id="protokol-6">Protokol :</h3>
+</code></pre><h2 id="typing-handler">Typing Handler</h2>
+<h3 id="protokol-">Protokol :</h3>
 <p><code>WS Socket.io</code></p>
-<h3 id="event-4">Event :</h3>
+<h3 id="event-">Event :</h3>
 <p><code>runner-typing</code></p>
-<h3 id="data-payload-4">Data Payload :</h3>
+<h3 id="data-payload-">Data Payload :</h3>
 <pre><code>{
-    user_id: integer  |get from auth login,
-    user_type: integer| 3=runner,2=admin
-    user_name: string | get from auth login
-    typing: true
-}</code></pre>
-<h3 id="example-5">Example :</h3>
-<pre><code>    socket.emit(&#39;runner-typing&#39;, {
-        user_id: this.auth.id,
-        user_type: this.auth.type,
-        user_name: this.auth.name,
-        typig: true
-    });</code></pre>
-<h3 id="usage">Usage :</h3>
-<p>
-Get <code>data.typing</code> from <code>api/runner/last-chat-contact</code>.
-</p>
-<p>
-Then watch/listen on socket <code>typing</code> event while update your state like these below:
-</p>
+    user_id: <span class="hljs-built_in">integer</span>  |<span class="hljs-keyword">get</span> <span class="hljs-keyword">from</span> auth login,
+    user_type: <span class="hljs-built_in">integer</span>| <span class="hljs-number">3</span>=runner,<span class="hljs-number">2</span>=admin
+    user_name: <span class="hljs-built_in">string</span> | <span class="hljs-keyword">get</span> <span class="hljs-keyword">from</span> auth login
+    typing: <span class="hljs-literal">true</span>
+}
+</code></pre><h3 id="example-">Example :</h3>
+<pre><code>    socket.emit(<span class="hljs-string">'runner-typing'</span>, {
+        user_id: <span class="hljs-keyword">this</span>.auth.id,
+        user_type: <span class="hljs-keyword">this</span>.auth.type,
+        user_name: <span class="hljs-keyword">this</span>.auth.name,
+        typig: <span class="hljs-literal">true</span>
+    });
+</code></pre><h3 id="usage-">Usage :</h3>
+<p>Get <code>data.typing</code> from <code>api/runner/last-chat-contact</code>.</p>
+<p>Then watch/listen on socket <code>typing</code> event while update your state like these below:</p>
 
-<pre><code>  updateTypingLastChatUsers(state, payload) {
-    if(state.lastChatUsers) {
-      state.lastChatUsers.map((item) =&gt; {
+<pre><code>  updateTypingLastChatUsers(<span class="hljs-keyword">state</span>, payload) {
+    if(<span class="hljs-keyword">state</span>.lastChatUsers) {
+      <span class="hljs-keyword">state</span>.lastChatUsers.map((item) =&gt; {
         if(payload.user_id == item.to_data.id &amp;&amp; payload.user_type == item.to_data.user_type) {
           item.typing = payload.typing;
         }
-        if(state.userChat) {
-          if(payload.user_id == state.userChat.id &amp;&amp; payload.user_type == state.userChat.type) {
-            state.userChat.typing = payload.typing;
+        if(<span class="hljs-keyword">state</span>.<span class="hljs-keyword">user</span>Chat) {
+          if(payload.user_id == <span class="hljs-keyword">state</span>.<span class="hljs-keyword">user</span>Chat.id &amp;&amp; payload.user_type == <span class="hljs-keyword">state</span>.<span class="hljs-keyword">user</span>Chat.type) {
+            <span class="hljs-keyword">state</span>.<span class="hljs-keyword">user</span>Chat.typing = payload.typing;
           }
         }
         return item;
       });
     }
-  },</code></pre>
+  },
+</code></pre>
