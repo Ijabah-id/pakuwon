@@ -12,14 +12,15 @@
 {
     user_type: integer|3=runner,2=admin,
     user_id: integer,
-    token: TOKEN
+    token: TOKEN,
+    mall_id: integer (get from selected mall)
 }
 ```
 
 ### Example 
 
 ```
-var socket = io("http://localhost:3000?user_type=3&user_id=1&token=UGFrdXdvbkdyb3VwOkJsbzNXZWJlV2E0QmV5Q3hPbnlo);
+var socket = io("http://localhost:3000/mall-{mall_id}?user_type=3&user_id=1&mall_id={mall_id}&token=UGFrdXdvbkdyb3VwOkJsbzNXZWJlV2E0QmV5Q3hPbnlo);
 ```
 
 
@@ -46,7 +47,8 @@ var socket = io("http://localhost:3000?user_type=3&user_id=1&token=UGFrdXdvbkdyb
     "message": string,
     "product_id": integer,
     "variant_id": integer,
-    "image": base64
+    "image": base64,
+    "mall_id": integer
 }
 
 ```
@@ -63,7 +65,8 @@ socket.emit('runner-send-chatting', {
     "message": string,
     "product": integer,
     "variant_id": integer,
-    "image": base64
+    "image": base64,
+    "mall_id": integer
 }, (data) => {
     //code for callback
 });
@@ -142,7 +145,8 @@ socket.on('runner-send-chatting', function(data){
 ```
 {
     user_type: integer|3=runner,2=admin,
-    user_id: integer
+    user_id: integer,
+    mall_id: integer
 }
 ```
 
